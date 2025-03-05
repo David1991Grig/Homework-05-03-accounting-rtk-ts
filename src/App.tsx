@@ -13,7 +13,7 @@ function App() {
             {token ? (
                 <Route path="/profile" element={<Profile />} />
             ) : (
-                <Route path="/profile" element={<Navigate to="/" />} />
+                <Route path="/*" element={<Navigate to="/" />} />
             )}
             </Routes>
     )

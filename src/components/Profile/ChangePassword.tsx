@@ -14,7 +14,7 @@ const ChangePassword = ({close}: Props) => {
         if (confirmPassword === newPassword) {
             alert('Save new password successfully!');
         } else {
-            alert('New paswword and confirm new password are different');
+            alert('New password and confirm new password are different');
         }
         close();
     }
