@@ -8,14 +8,20 @@ function App() {
 
 
     return (
+
         <Routes>
-            <Route path="/" element={<Guest/>} />
             {token ? (
-                <Route path="/profile" element={<Profile />} />
+                <>
+                    <Route path="/profile" element={<Profile />} />
+                    <Route path="/*" element={<Navigate to="/profile" />} />
+                </>
             ) : (
-                <Route path="/*" element={<Navigate to="/" />} />
+                <>
+                    <Route path="/" element={<Guest />} />
+                    <Route path="/*" element={<Navigate to="/" />} />
+                </>
             )}
-            </Routes>
+        </Routes>
     )
 }
 
