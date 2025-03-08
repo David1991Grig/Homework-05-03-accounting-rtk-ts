@@ -1,13 +1,14 @@
 import ProfileData from "./ProfileData.tsx";
 import UpdateUser from "./UpdateUser.tsx";
-import {useNavigate} from "react-router";
+import {deleteToken} from "../../features/slice/tokenSlice.ts";
+import {useAppDispatch} from "../../app/hooks.ts";
+import {deleteUser} from "../../features/slice/userSlice.ts";
 
 const Profile = () => {
-    const navigate = useNavigate();
+    const dispatch = useAppDispatch();
     const handleClickLogout = () => {
-        // TODO handleClickLogout
-        alert('Logout');
-        return navigate("/");
+        dispatch(deleteToken())
+        dispatch(deleteUser())
     }
     return (
         <div>

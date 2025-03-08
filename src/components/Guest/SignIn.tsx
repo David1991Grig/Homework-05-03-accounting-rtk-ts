@@ -1,15 +1,15 @@
 import {useState} from "react";
-import {useNavigate} from "react-router";
+import {fetchUser} from "../../features/api/accountApi.ts";
+import {createToken} from "../../utils/constants.ts";
+import {useAppDispatch} from "../../app/hooks.ts";
 
 const SignIn = () => {
     const [login, setLogin] = useState('');
     const [password, setPassword] = useState('');
-    const navigate = useNavigate();
+    const dispatch = useAppDispatch();
 
     const handleClickSignIn = () => {
-        // TODO handleClickSignIn
-        alert('Sign in')
-        return navigate("/profile")
+        dispatch(fetchUser(createToken(login, password)));
     }
 
     const handleClickClear = () => {
