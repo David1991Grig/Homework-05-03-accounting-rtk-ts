@@ -1,6 +1,7 @@
 import {useState} from "react";
 import {changePassword} from "../../features/api/accountApi.ts";
 import {useAppDispatch} from "../../app/hooks.ts";
+import {createTokenPassword} from "../../utils/constants.ts";
 
 interface Props {
     close: () => void;
@@ -14,7 +15,7 @@ const ChangePassword = ({close}: Props) => {
 
     const handleClickSave = () => {
         if (confirmPassword === newPassword) {
-            dispatch(changePassword(newPassword));
+            dispatch(changePassword(createTokenPassword(newPassword)));
             alert('Save new password successfully!');
         } else {
             alert('New password and confirm new password are different');

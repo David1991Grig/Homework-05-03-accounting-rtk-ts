@@ -1,5 +1,5 @@
 import {createAsyncThunk} from "@reduxjs/toolkit";
-import {base_url, createToken} from "../../utils/constants.ts";
+import {base_url, createToken, decodeTokenPassword} from "../../utils/constants.ts";
 import {UserDate, UserProfile, UserRegister} from "../../utils/types";
 import { RootState } from '../../app/store.ts'
 
@@ -69,11 +69,10 @@ export const changePassword = createAsyncThunk<string,string, {state: RootState}
             method:'put',
             headers :{
                 Authorization: getState().token,
-                'X-Password': password
+                'X-Password': decodeTokenPassword(password)
             }
         })
         if(response.status === 401){
-            console.log('error')
             throw new Error(`login or password incorrect`)
         }if(!response.ok){
             throw new Error("Something went wrong");
