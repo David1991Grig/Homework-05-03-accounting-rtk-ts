@@ -6,7 +6,7 @@ import {UserProfile} from "../utils/types";
 const preloadedState = JSON.parse(localStorage.getItem("state")||'{}') as {user: UserProfile, token: string};
 export const store = configureStore({
     reducer: {token, user},
-    preloadedState
+    preloadedState,
 });
 
 store.subscribe(() => localStorage.setItem("state",JSON.stringify(store.getState())));

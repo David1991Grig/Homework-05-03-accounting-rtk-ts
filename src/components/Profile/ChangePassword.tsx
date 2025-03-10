@@ -1,7 +1,9 @@
 import {useState} from "react";
 import {changePassword} from "../../features/api/accountApi.ts";
 import {useAppDispatch} from "../../app/hooks.ts";
-import {createTokenPassword} from "../../utils/constants.ts";
+import {createTokenPassword, extractPasswordFromToken} from "../../utils/constants.ts";
+import {useSelector} from "react-redux";
+import {RootState} from "../../app/store.ts";
 
 interface Props {
     close: () => void;
@@ -12,12 +14,16 @@ const ChangePassword = ({close}: Props) => {
     const [newPassword, setNewPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
     const dispatch = useAppDispatch();
+    const token = useSelector((state: RootState) => state.token);
 
     const handleClickSave = () => {
-        if (confirmPassword === newPassword) {
+        if (confirmPassword === newPassword && oldPassword === extractPasswordFromToken(token)) {
             dispatch(changePassword(createTokenPassword(newPassword)));
             alert('Save new password successfully!');
-        } else {
+        }else if (oldPassword !== extractPasswordFromToken(token)){
+            alert('old password is incorrect');
+        }
+        else {
             alert('New password and confirm new password are different');
         }
         close();

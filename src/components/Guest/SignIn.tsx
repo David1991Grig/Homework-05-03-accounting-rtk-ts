@@ -8,9 +8,10 @@ const SignIn = () => {
     const [password, setPassword] = useState('');
     const dispatch = useAppDispatch();
 
-    const handleClickSignIn = () => {
-        dispatch(fetchUser(createToken(login, password)));
-    }
+    const handleClickSignIn = async () => {
+        await dispatch(fetchUser(createToken(login, password)));
+    };
+
 
     const handleClickClear = () => {
         setLogin('');
